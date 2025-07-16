@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stdentportal</title>
+    
+</head>
+<body>
+<center><h1 class="h1">STUDENT PORTAL</h1>
+
+<form >
+  <table border="1">
+    <tr><td>Name</td><td><input id="name"></td></tr>
+    <tr><td>Age</td><td><input id="age" type="number"></td></tr>
+    <tr><td>Gender</td><td>
+      <label><input type="radio" name="gender" value="Male" checked> Male</label>
+      <label><input type="radio" name="gender" value="Female"> Female</label>
+    </td></tr>
+    <tr><td>Course</td><td>
+      <select id="course">
+        <option>Javascript</option>
+        <option>CSS</option>
+        <option>Python</option>
+        <option>Java</option>
+        <option>SQL</option>
+      </select>
+    </td></tr>
+    <tr><td>E-Mail</td><td><input id="email" type="email"></td></tr>
+    <tr><td>Action</td><td>
+      <button type="button" onclick="save()">Save</button>
+    </td></tr>
+  </table>
+</form>
+</center>
+<center>
+  <table id="studenttable" border="1">
+    <tr>
+      <th>NAME</th><th>AGE</th><th>GENDER</th><th>COURSE</th><th>E‑MAIL</th><th>ACTION</th>
+    </tr>
+  </table>
+</center>
+
+<script>
+  function deleteRow(btn) {
+    btn.closest('tr').remove();
+  }
+
+  function save() {
+    const name = document.getElementById("name").value.trim();
+    const age = document.getElementById("age").value.trim();
+    const gender = document.querySelector('input[name="gender"]:checked').value;
+    const course = document.getElementById("course").value;
+    const email = document.getElementById("email").value.trim();
+
+    if (!name || !age || !email) {
+      alert("Please fill all fields.");
+      return;
+    }
+
+    const table = document.getElementById("studenttable");
+    const newRow = table.insertRow(-1);  
+    const values = [name, age, gender, course, email];
+    for(i=0;i<=values.length;i++)
+   {
+    let newcell = newRow.insertCell(i);
+    newcell.textContent = values[i];
+   }
+
+    const actionCell = newRow.insertCell(5);
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = "Delete";
+    btn.addEventListener("click", () => deleteRow(btn));
+    actionCell.appendChild(btn);
+
+    
+    document.querySelector('form').reset();
+  }
+</script>
+
+<style>
+  *{
+    background-color:lemonchiffon;
+   }
+   button{
+    background-color:lightslategrey;
+    border-radius: 5px;
+    border-color:black;
+   }
+   button:hover{
+    color: whitesmoke;
+   }
+   .h1{
+    font-size:xx-large;
+    line-height: 1.2;
+     }
+
+
+
+</style>
+</body>
+</html>
